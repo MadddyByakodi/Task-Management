@@ -8,4 +8,6 @@ To run the Applictaion please follow the steps
 
 * Make sure mangodb is running.
 
+Open http://localhost:3000/ to view the application
+
 
