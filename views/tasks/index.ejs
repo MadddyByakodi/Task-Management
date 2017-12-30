@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Task </title>
+    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css' />
+    <link rel="stylesheet" href="/scripts/easy-autocomplete/dist/easy-autocomplete.min.css"> 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-beta/css/bootstrap.min.css"> 
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body class="hm-gradient">
+    <main>
+        
+        <!--MDB Tables-->
+        <div class="container mt-4">
+
+            <div class="text-center darken-grey-text mb-4">
+                <h1 class="font-bold mt-4 mb-3 h5">Task List</h1>
+                <a class="btn btn-danger btn-md" href="/task/create" >Create Task</a>
+            </div>
+
+            <div class="card mb-4">
+                <div class="card-body">
+                    <!-- Grid row -->
+                    <div class="row">
+                        <!-- Grid column -->
+                        <div class="col-md-12">
+                            <h2 class="pt-3 pb-4 text-center font-bold font-up deep-purple-text">Search within table</h2>
+                            <div class="input-group md-form form-sm form-2 pl-0">
+                                <input  id="search-query" class="form-control my-0 py-1 pl-3 purple-border" type="text" placeholder="Search something here..." aria-label="Search">
+                                <span class="input-group-addon waves-effect purple lighten-2" id="basic-addon1"><a><i class="fa fa-search white-text" aria-hidden="true"></i></a></span>
+                            </div>
+                        </div>
+                        <!-- Grid column -->
+                    </div>
+    
+                    <% if(tasks.length>0) { %>
+                    <table class="list-table table table-striped">
+                      <thead>
+                        <tr>
+                          <th>Task ID</th>
+                          <th>Task Name</th>
+                          <th>Description</th>
+                          <th>Created By</th>
+                          <th>End date</th>
+                          <th>Created date</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+
+                        <% for(var i=0; i<tasks.length;i++) { %>
+                          <tr>
+                            <td><a href="/task/show/<%= tasks[i]._id%>"><%= tasks[i].TaskID%></a></td>
+                            <td><%= tasks[i].TaskName%></td>
+                            <td><%= tasks[i].description%></td>
+                            <td><%= tasks[i].CreatedBy%></td>
+                            <td><%= tasks[i].End_date%></td>
+                            <td><%= tasks[i].Created_date%></td>
+                          </tr>
+                        <% } %>
+                      </tbody>
+                    </table>
+                    <% } else { %>
+                      <div>No Tasks found.</div>
+                    <% } %>
+
+                </div>
+            </div>
+        </div>
+      </main>
+  </body>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+  <script type="text/javascript" src="/scripts/easy-autocomplete/dist/jquery.easy-autocomplete.min.js"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-beta/js/bootstrap.min.js"></script>
+  <script type="text/javascript">
+        $(function () {
+
+          $("#search-query").autocomplete({
+              source: function (request, response) {
+                 $.ajax({
+                    url: "/task/autocomplte",
+                    type: "GET",
+                    data: request,  // request is the value of search input
+                    success: function (data) {
+                      // Map response values to fiedl label and value
+                       response($.map(data, function (el) {
+                          return {
+                             label: el.TaskName,
+                             value: el._id
+                          };
+                          }));
+                       }
+                    });
+                 },
+                 
+                 // The minimum number of characters a user must type before a search is performed.
+                 minLength: 2, 
+                 
+                 // set an onFocus event to show the result on input field when result is focused
+                 focus: function (event, ui) { 
+                    this.value = ui.item.label; 
+                    // Prevent other event from not being execute
+                    event.preventDefault();
+                 },
+                 select: function (event, ui) {
+
+                    window.location.href = '/task/show/'+ui.item.value+''; 
+                    
+                 }
+          });
+
+        });
+  </script>
+</html>

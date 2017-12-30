@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Task </title>
+    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css' />
+    <link rel="stylesheet" href="/scripts/easy-autocomplete/dist/easy-autocomplete.min.css"> 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-beta/css/bootstrap.min.css"> 
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body class="hm-gradient">
+    <main>
+        
+        <!--MDB Tables-->
+        <div class="container mt-4">
+
+            <div class="text-center darken-grey-text mb-4">
+                <h1 class="font-bold mt-4 mb-3 h5">Task Details</h1>
+                <a class="btn btn-danger btn-md" href="/task/">Tasks</a>
+            </div>
+
+            <div class="card mb-4">
+                <div class="card-body">
+                <table>
+                  <tbody>
+                    <tr>
+                      <td>TaskID</td>
+                      <td>:</td>
+                      <td><%= task.TaskID %></td>
+                    </tr>
+                    <tr>
+                      <td>TaskName</td>
+                      <td>:</td>
+                      <td><%= task.TaskName %></td>
+                    </tr>
+                    <tr>
+                      <td>Description</td>
+                      <td>:</td>
+                      <td><%= task.description %></td>
+                    </tr>
+                    <tr>
+                      <td>End date</td>
+                      <td>:</td>
+                      <td><%= task.End_date %></td>
+                    </tr>
+                    <tr>
+                      <td>Created Date</td>
+                      <td>:</td>
+                      <td><%= task.Created_date %></td>
+                    </tr>
+                  </tbody>
+                </table>
+                <a class='btn btn-warning btn-sm' href="/task/edit/<%= task._id%>" style='float: left'>EDIT</a>
+                <form action="/task/delete/<%= task._id%>" method="post">
+                  <button class='btn btn-danger btn-sm' type="submit">DELETE</button>
+                </form>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Task </title>
+    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css' />
+    <link rel="stylesheet" href="/scripts/easy-autocomplete/dist/easy-autocomplete.min.css"> 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-beta/css/bootstrap.min.css"> 
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body class="hm-gradient">
+    <main>
+        
+        <!--MDB Tables-->
+        <div class="container mt-4">
+
+            <div class="text-center darken-grey-text mb-4">
+                <h1 class="font-bold mt-4 mb-3 h5">Task Edit</h1>
+                <a class="btn btn-danger btn-md" href="/task/">Tasks</a>
+            </div>
+
+            <div class="card mb-4">
+                <div class="card-body">
+                  <form action="/task/update/<%= task._id%>" method="post">
+                    <table>
+                      <tbody>
+                        <tr>
+                          <td>Name</td>
+                          <td><input type="text" name="TaskID" value="<%= task.TaskID %>" /></td>
+                        </tr>
+                        <tr>
+                          <td>TaskName</td>
+                          <td><input type="text" name="TaskName" value="<%= task.TaskID %>" /></td>
+                        </tr>
+                        <tr>
+                          <td>Description</td>
+                          <td><input type="text" name="description" value="<%= task.description %>" /></td>
+                        </tr>
+                        <tr>
+                        <tr>
+                          <td>Created By</td>
+                          <td><input type="text" name="CreatedBy" value="<%= task.CreatedBy %>" /></td>
+                        </tr>
+                        <tr>
+                          <td>End date</td>
+                          <td><input type="date" name="End_date" id='end_date' value="" /></td>
+                        </tr>
+                          <input type="hidden" name="Created_date" value="<%= task.Created_date %>" >
+                        <tr>
+                          <td colspan="2"><button class='btn btn-primary btn-sm' type="submit">Update</button></td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </form>
+                </div>
+            </div>
+          </div>
+      </main>
+    </div>
+  </body>
+  <script type="text/javascript">
+    window.onload = function() {
+
+          var today = new Date("<%= task.End_date %>");
+      var dd = today.getDate();
+      var mm = today.getMonth()+1; //January is 0!
+
+      var yyyy = today.getFullYear();
+      if(dd<10){
+          dd='0'+dd;
+      } 
+      if(mm<10){
+          mm='0'+mm;
+      } 
+      //var today = dd+'/'+mm+'/'+yyyy;
+      var today = yyyy+'-'+mm+'-'+dd;
+      console.log(today);
+      document.getElementById("end_date").value = today;
+    }
+  </script>
+</html>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Task </title>
+    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css' />
+    <link rel="stylesheet" href="/scripts/easy-autocomplete/dist/easy-autocomplete.min.css"> 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-beta/css/bootstrap.min.css"> 
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body class="hm-gradient">
+    <main>
+        
+        <!--MDB Tables-->
+        <div class="container mt-4">
+
+            <div class="text-center darken-grey-text mb-4">
+                <h1 class="font-bold mt-4 mb-3 h5">Create Task </h1>
+                <a class="btn btn-danger btn-md" href="/task/" >Tasks</a>
+            </div>
+
+            <div class="card mb-4">
+                <div class="card-body">
+                      <form action="/task/save" method="post">
+                        <table>
+                          <tbody>
+                            <tr>
+                              <td>Task ID</td>
+                              <td><input type="text" name="TaskID" /></td>
+                            </tr>
+                            <tr>
+                              <td>Task Name</td>
+                              <td><input type='text' name="TaskName"></td>
+                            </tr>
+                            <tr>
+                              <td>Description</td>
+                              <td><input type="text" name="description" /></td>
+                            </tr>
+                            <tr>
+                              <td>Created By</td>
+                              <td><input type="text" name="CreatedBy" /></td>
+                            </tr>
+                            <tr>
+                              <td>End date</td>
+                              <td><input type="date" name="End_date" /></td>
+                            </tr>
+                            <tr>
+                              <td colspan="2"><button class="btn-primary" type="submit">Add</button></td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </form>
+                  </div>
+            </div>
+        </div>
+      </main>
+  </body>
+</html>
